@@ -1,0 +1,16 @@
+gamebacklog\Main.class
+gamebacklog\Game.class
+gamebacklog\GameFormView.class
+gamebacklog\SessionManager.class
+gamebacklog\ThemeManager.class
+gamebacklog\GameLibraryView.class
+gamebacklog\DashboardView.class
+gamebacklog\DatabaseManager.class
+gamebacklog\Launcher.class
+gamebacklog\MainController.class
+gamebacklog\UI.class
+gamebacklog\GameDetailsView.class
+gamebacklog\AppSettings.class
+gamebacklog\AppPaths.class
+gamebacklog\DatabaseManager$SessionRow.class
+gamebacklog\GameService.class

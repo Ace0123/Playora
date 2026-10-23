@@ -1,0 +1,84 @@
+/* Theme colours are defined once here; ".light" on the root switches the whole app. */
+.root {
+  -bg: #000000; -sidebar: #0B0B0B; -card: #121212; -input: #1C1C1C; -line: #3D3D3D;
+  -accent: #FFFFFF; -accent-hover: #D9D9D9; -on-accent: #000000; -accent2: #FFFFFF; -on-accent2: #000000;
+  -text: #FFFFFF; -sub: #BDBDBD; -star: #FFFFFF; -btn2: #262626; -btn2-hover: #3A3A3A;
+  -fx-font-family: "Segoe UI", "Helvetica Neue", Arial, sans-serif; -fx-font-size: 14px; -fx-background-color: -bg;
+}
+.root.light {
+  -bg: #FFFFFF; -sidebar: #F2F2F2; -card: #FFFFFF; -input: #EFEFEF; -line: #BDBDBD;
+  -accent: #000000; -accent-hover: #333333; -on-accent: #FFFFFF; -accent2: #000000; -on-accent2: #FFFFFF;
+  -text: #000000; -sub: #4D4D4D; -star: #000000; -btn2: #E6E6E6; -btn2-hover: #D0D0D0;
+}
+.label { -fx-text-fill: -text; }
+.content, .scroll-pane, .scroll-pane > .viewport { -fx-background-color: -bg; }
+.scroll-pane { -fx-border-color: transparent; -fx-focus-color: transparent; }
+.top-bar { -fx-background-color: -sidebar; -fx-padding: 10 20; -fx-border-color: -line; -fx-border-width: 0 0 1 0; }
+.theme-btn { -fx-background-color: -card; -fx-text-fill: -text; -fx-font-size: 18px; -fx-background-radius: 20; -fx-padding: 4 14; -fx-cursor: hand; -fx-border-color: -line; -fx-border-radius: 20; }
+.theme-btn:hover { -fx-background-color: -btn2-hover; }
+.sidebar { -fx-background-color: -sidebar; -fx-padding: 20 14; }
+.hyperlink { -fx-text-fill: -accent2; -fx-border-color: transparent; }
+.app-title { -fx-text-fill: -accent; -fx-font-size: 20px; -fx-font-weight: bold; }
+.nav-btn { -fx-background-color: transparent; -fx-text-fill: -sub; -fx-alignment: CENTER_LEFT; -fx-padding: 12 16; -fx-background-radius: 10; -fx-cursor: hand; }
+.nav-btn:hover { -fx-background-color: -btn2; -fx-text-fill: -text; }
+.nav-btn.active { -fx-background-color: -accent; -fx-text-fill: -on-accent; }
+.page-title { -fx-text-fill: -text; -fx-font-size: 26px; -fx-font-weight: bold; }
+.section-title { -fx-text-fill: -accent2; -fx-font-size: 16px; -fx-font-weight: bold; }
+.sub { -fx-text-fill: -sub; }
+.text { -fx-text-fill: -text; }
+.empty-icon { -fx-font-size: 56px; }
+.error-text { -fx-text-fill: #E5484D; -fx-font-weight: bold; }
+.stat-card { -fx-background-color: -card; -fx-background-radius: 16; -fx-padding: 18; -fx-border-color: -line; -fx-border-radius: 16; }
+.stat-value { -fx-text-fill: -accent2; -fx-font-size: 28px; -fx-font-weight: bold; }
+.game-card { -fx-background-color: -card; -fx-background-radius: 16; -fx-padding: 16; -fx-cursor: hand; -fx-border-color: -line; -fx-border-radius: 16; }
+.game-card:hover { -fx-border-color: -accent; -fx-effect: dropshadow(gaussian, rgba(128,128,128,0.55), 18, 0.2, 0, 4); }
+.card-title { -fx-font-size: 15px; -fx-font-weight: bold; -fx-padding: 6 0 0 0; }
+.stars { -fx-text-fill: -star; -fx-font-size: 15px; }
+.stars-big { -fx-text-fill: -star; -fx-font-size: 26px; }
+.star-pick { -fx-text-fill: -star; -fx-font-size: 30px; -fx-cursor: hand; }
+.badge { -fx-background-radius: 10; -fx-padding: 2 10; -fx-font-size: 11px; -fx-font-weight: bold; -fx-text-fill: white; }
+.badge-to-play { -fx-background-color: #3B82F6; }
+.badge-playing { -fx-background-color: #7C5CFC; }
+.badge-completed { -fx-background-color: #10A37F; }
+.btn { -fx-background-radius: 10; -fx-padding: 10 20; -fx-font-weight: bold; -fx-cursor: hand; }
+.btn-primary { -fx-background-color: -accent; -fx-text-fill: -on-accent; }
+.btn-primary:hover { -fx-background-color: -accent-hover; }
+.btn-secondary { -fx-background-color: -btn2; -fx-text-fill: -text; }
+.btn-secondary:hover { -fx-background-color: -btn2-hover; }
+.btn-danger { -fx-background-color: #E5484D; -fx-text-fill: white; }
+.btn-danger:hover { -fx-background-color: #F2656A; }
+.btn-play { -fx-background-color: -accent2; -fx-text-fill: -on-accent2; }
+.btn-play:hover { -fx-opacity: 0.85; }
+.btn-play:disabled { -fx-background-color: -btn2; -fx-text-fill: -accent2; -fx-opacity: 1; }
+.live-time { -fx-text-fill: -accent2; -fx-font-size: 26px; -fx-font-weight: bold; -fx-font-family: "Consolas", monospace; }
+.tab-btn { -fx-background-color: -card; -fx-text-fill: -sub; -fx-background-radius: 20; -fx-padding: 8 20; -fx-cursor: hand; -fx-border-color: -line; -fx-border-radius: 20; }
+.tab-btn:hover { -fx-text-fill: -text; }
+.tab-btn:selected { -fx-background-color: -accent2; -fx-text-fill: -on-accent2; -fx-font-weight: bold; }
+.text-field, .text-area, .text-area .content { -fx-background-color: -input; -fx-text-fill: -text; -fx-prompt-text-fill: -sub; -fx-background-radius: 10; -fx-padding: 9 12; }
+.text-area { -fx-padding: 0; }
+.text-field:focused, .text-area:focused { -fx-effect: dropshadow(gaussian, -accent, 6, 0.3, 0, 0); }
+.list-view { -fx-background-color: -input; -fx-background-radius: 10; -fx-control-inner-background: -input; }
+.list-view .list-cell { -fx-background-color: transparent; -fx-text-fill: -text; -fx-padding: 8 12; }
+.list-view .list-cell:hover { -fx-background-color: -btn2; }
+.list-view .list-cell:selected { -fx-background-color: -accent; -fx-text-fill: -on-accent; }
+.combo-box-base { -fx-background-color: -input; -fx-background-radius: 10; }
+.combo-box-base .arrow-button { -fx-background-color: transparent; }
+.combo-box-base .arrow { -fx-background-color: -sub; }
+.combo-box .list-cell { -fx-text-fill: -text; -fx-background-color: transparent; }
+.combo-box-popup .list-view { -fx-background-color: -card; -fx-control-inner-background: -card; }
+.combo-box-popup .list-cell { -fx-background-color: -card; -fx-text-fill: -text; -fx-padding: 8 12; }
+.combo-box-popup .list-cell:hover, .combo-box-popup .list-cell:selected { -fx-background-color: -accent; -fx-text-fill: -on-accent; }
+.tooltip { -fx-background-color: -card; -fx-text-fill: -text; }
+.toast { -fx-background-radius: 12; -fx-padding: 12 24; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.4), 14, 0.2, 0, 4); }
+.toast .text, .toast-ok, .toast-error { -fx-text-fill: white; }
+.toast-ok { -fx-background-color: #10A37F; }
+.toast-error { -fx-background-color: #E5484D; }
+.dialog-pane { -fx-background-color: -card; }
+.dialog-pane .label { -fx-text-fill: -text; }
+.dialog-pane .button-bar .button { -fx-background-color: -accent; -fx-text-fill: -on-accent; -fx-background-radius: 8; }
+.btn-help { -fx-background-color: -btn2; -fx-text-fill: -text; -fx-background-radius: 50; -fx-min-width: 36; -fx-min-height: 36; -fx-max-width: 36; -fx-max-height: 36; -fx-padding: 0; -fx-font-weight: bold; -fx-border-color: -line; -fx-border-radius: 50; }
+.btn-help:hover { -fx-background-color: -btn2-hover; }
+.help-code { -fx-font-family: "Consolas", monospace; -fx-background-color: -input; -fx-background-radius: 8; -fx-padding: 10 14; }
+.help-note { -fx-background-color: -card; -fx-border-color: -line; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12; }
+.dialog-pane > .header-panel { -fx-background-color: -sidebar; }
+.dialog-pane > .header-panel .label { -fx-text-fill: -text; -fx-font-weight: bold; -fx-font-size: 16px; }
