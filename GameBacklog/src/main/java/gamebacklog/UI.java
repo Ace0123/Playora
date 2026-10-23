@@ -32,8 +32,22 @@ final class UI {
     }
 
     static String stars(int r) { return "★".repeat(Math.max(0, r)) + "☆".repeat(Math.max(0, 5 - r)); }
-    static String hours(double h) { return h == Math.rint(h) ? (long) h + " h" : String.format("%.1f h", h); }
-    static String plain(double h) { return h == Math.rint(h) ? String.valueOf((long) h) : String.valueOf(h); }
+    public static String hours(double h) {
+        if (h <= 0 || Double.isNaN(h)) return "0h";
+
+        int wholeHours = (int) h;
+        // Calculate minutes from the decimal remainder
+        int minutes = (int) Math.round((h - wholeHours) * 60);
+
+        // Handle case where rounding minutes leads to 60
+        if (minutes == 60) {
+            wholeHours++;
+            minutes = 0;
+        }
+
+        if (minutes == 0) return wholeHours + "h";
+        return wholeHours + "h " + minutes + "m";
+    }    static String plain(double h) { return h == Math.rint(h) ? String.valueOf((long) h) : String.valueOf(h); }
 
     static Label badge(String status) {
         return label(status, "badge", "badge-" + status.toLowerCase().replace(' ', '-'));

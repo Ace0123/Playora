@@ -36,7 +36,7 @@ public class GameFormView {
         priority.setValue(g.getPriority() != null ? g.getPriority() : "Medium");
         priority.setMaxWidth(Double.MAX_VALUE);
 
-        TextField hours = new TextField(UI.plain(g.getHours()));
+        TextField hours = new TextField(String.format("%.2f", g.getHours()));
 
         StackPane preview = new StackPane();
         preview.setMaxWidth(240);

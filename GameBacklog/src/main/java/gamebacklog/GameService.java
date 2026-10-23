@@ -74,18 +74,36 @@ public class GameService {
     }
 
     public void loadSamples() {
-        Object[][] d = {
-            {"The Legend of Zelda: Tears of the Kingdom", "Adventure", "Nintendo Switch", "Playing", 5, 62.5, "Building a flying machine took me hours."},
-            {"Elden Ring", "RPG", "PC", "Completed", 5, 140.0, "Brutal but unforgettable open world."},
-            {"Hades", "Indie", "PC", "Completed", 4, 48.0, "Great combat loop and story."},
-            {"God of War Ragnarök", "Action", "PlayStation 5", "Playing", 5, 21.0, "Stunning visuals."},
-            {"Baldur's Gate 3", "RPG", "PC", "To Play", 0, 0.0, "Everyone recommends it."},
-            {"Hollow Knight", "Platformer", "Nintendo Switch", "To Play", 0, 0.0, "Waiting for a long weekend."},
-            {"Forza Horizon 5", "Racing", "Xbox Series X/S", "Completed", 4, 35.5, "Perfect for relaxing."},
-            {"Stardew Valley", "Simulation", "PC", "Playing", 4, 80.0, "Just one more day…"}
+        // Added a dummy .exe path "C:\\samples\\game.exe" instead of ""
+        Object[][] d = new Object[][]{
+                {"The Legend of Zelda: Tears of the Kingdom", "Adventure", "Nintendo Switch", "Playing", 5, 62.5, "C:\\samples\\zelda.exe", "Building a flying machine took me hours."},
+                {"Elden Ring", "RPG", "PC", "Completed", 5, 140.0, "C:\\samples\\elden.exe", "Brutal but unforgettable open world."},
+                {"Hades", "Indie", "PC", "Completed", 4, 48.0, "C:\\samples\\hades.exe", "Great combat loop and story."},
+                {"God of War Ragnarök", "Action", "PlayStation 5", "Playing", 5, 21.0, "C:\\samples\\gow.exe", "Stunning visuals."},
+                {"Baldur's Gate 3", "RPG", "PC", "To Play", 0, 0.0, "C:\\samples\\bg3.exe", "Everyone recommends it."},
+                {"Hollow Knight", "Platformer", "Nintendo Switch", "To Play", 0, 0.0, "C:\\samples\\hk.exe", "Waiting for a long weekend."},
+                {"Forza Horizon 5", "Racing", "Xbox Series X/S", "Completed", 4, 35.5, "C:\\samples\\forza.exe", "Perfect for relaxing."},
+                {"Stardew Valley", "Simulation", "PC", "Playing", 4, 80.0, "C:\\samples\\stardew.exe", "Just one more day…"}
         };
-        for (Object[] r : d)
-            db.insert(new Game((String) r[0], (String) r[1], (String) r[2], (String) r[3], (int) r[4], (double) r[5], "", (String) r[6]));
+
+        for(Object[] r : d) {
+            try {
+                // Ensure we create the Game object with a path that ends in .exe
+                Game g = new Game(
+                        (String)r[0], // Title
+                        (String)r[1], // Genre
+                        (String)r[2], // Platform
+                        (String)r[3], // Status
+                        (Integer)r[4], // Rating
+                        (Double)r[5],  // Hours
+                        (String)r[6],  // Path (.exe) <--- THIS WAS EMPTY BEFORE
+                        (String)r[7]   // Notes
+                );
+                this.db.insert(g);
+            } catch (Exception e) {
+                System.err.println("Failed to insert sample: " + r[0] + " Error: " + e.getMessage());
+            }
+        }
     }
 
     /** Trims spaces and the quotation marks that Windows adds with "Copy as path". */
