@@ -82,3 +82,23 @@
 .help-note { -fx-background-color: -card; -fx-border-color: -line; -fx-border-radius: 10; -fx-background-radius: 10; -fx-padding: 12; }
 .dialog-pane > .header-panel { -fx-background-color: -sidebar; }
 .dialog-pane > .header-panel .label { -fx-text-fill: -text; -fx-font-weight: bold; -fx-font-size: 16px; }
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* This hides the vertical scrollbar completely */
+.scroll-pane .scroll-bar:vertical {
+  -fx-opacity: 0;
+  -fx-padding: 0;
+}
+
+/* This ensures the track (the background of the bar) is also hidden */
+.scroll-pane .scroll-bar:vertical .track {
+  -fx-opacity: 0;
+}
+
+/* Optional: This hides the horizontal scrollbar too */
+.scroll-pane .scroll-bar:horizontal {
+  -fx-opacity: 0;
+  -fx-padding: 0;
+}

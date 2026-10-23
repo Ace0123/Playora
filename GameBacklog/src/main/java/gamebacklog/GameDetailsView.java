@@ -91,6 +91,7 @@ public class GameDetailsView {
         page.setPadding(new Insets(28));
         ScrollPane sp = new ScrollPane(page);
         sp.setFitToWidth(true);
+
         return sp;
     }
 

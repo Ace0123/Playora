@@ -35,6 +35,7 @@ public class GameLibraryView {
         FlowPane grid = new FlowPane(18, 18);
         grid.setPadding(new Insets(6));
         ScrollPane sp = new ScrollPane(grid);
+
         sp.setFitToWidth(true);
         BorderPane body = new BorderPane();
         VBox.setVgrow(body, Priority.ALWAYS);
