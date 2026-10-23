@@ -36,8 +36,15 @@ public class Game {
     public String getPlatform() { return platform; } public void setPlatform(String p) { platform = p; }
     public String getStatus() { return status; } public void setStatus(String s) { status = s; }
     public int getRating() { return rating; }    public void setRating(int r) { rating = r; }
-    public double getHours() { return hours; }   public void setHours(double h) { hours = h; }
-    public String getCoverPath() { return coverPath; } public void setCoverPath(String c) { coverPath = c; }
+
+    // --- FIXED SECTION: Added these two methods so GameService can find them ---
+    public double getHours() { return hours; }
+    public void setHours(double h) { this.hours = h; }
+    // -------------------------------------------------------------------------
+
+    public String getFormattedHours() {
+        return String.format("%.2f", this.hours);
+    }    public String getCoverPath() { return coverPath; } public void setCoverPath(String c) { coverPath = c; }
     public String getNotes() { return notes; }   public void setNotes(String n) { notes = n; }
 
     public String getExePath() { return exePath; }     public void setExePath(String e) { exePath = e == null ? "" : e; }

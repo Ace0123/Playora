@@ -35,15 +35,18 @@ public class GameService {
 
     /** Returns an error message, or null when valid. */
     public String validate(Game g) {
+        // Fix: Check for null/blank BEFORE checking length to avoid NullPointerException
         if (g.getTitle() == null || g.getTitle().isBlank()) return "Game title is required.";
         if (g.getTitle().length() > 100) return "Title must be 100 characters or fewer.";
         if (g.getGenre() == null || g.getGenre().isBlank()) return "Genre is required.";
         if (g.getPlatform() == null || g.getPlatform().isBlank()) return "Please choose a platform.";
         if (!STATUSES.contains(g.getStatus())) return "Please choose a status.";
-        if (g.getRating() < 0 || g.getRating() > 5) return "Rating must be between 1 and 5 stars.";
+        if (g.getRating() < 0 || g.getRating() > 5) return "Rating must be between 0 and 5 stars.";
+
         double h = g.getHours();
         if (Double.isNaN(h) || Double.isInfinite(h) || h < 0) return "Hours played cannot be negative or invalid.";
         if (h > 100000) return "Hours played is unrealistically high.";
+
         String exe = g.getExePath();
         if (exe != null && !exe.isBlank() && !exe.trim().toLowerCase().endsWith(".exe")) return "Executable path must point to a .exe file.";
         return null;
@@ -74,36 +77,18 @@ public class GameService {
     }
 
     public void loadSamples() {
-        // Added a dummy .exe path "C:\\samples\\game.exe" instead of ""
-        Object[][] d = new Object[][]{
-                {"The Legend of Zelda: Tears of the Kingdom", "Adventure", "Nintendo Switch", "Playing", 5, 62.5, "C:\\samples\\zelda.exe", "Building a flying machine took me hours."},
-                {"Elden Ring", "RPG", "PC", "Completed", 5, 140.0, "C:\\samples\\elden.exe", "Brutal but unforgettable open world."},
-                {"Hades", "Indie", "PC", "Completed", 4, 48.0, "C:\\samples\\hades.exe", "Great combat loop and story."},
-                {"God of War Ragnarök", "Action", "PlayStation 5", "Playing", 5, 21.0, "C:\\samples\\gow.exe", "Stunning visuals."},
-                {"Baldur's Gate 3", "RPG", "PC", "To Play", 0, 0.0, "C:\\samples\\bg3.exe", "Everyone recommends it."},
-                {"Hollow Knight", "Platformer", "Nintendo Switch", "To Play", 0, 0.0, "C:\\samples\\hk.exe", "Waiting for a long weekend."},
-                {"Forza Horizon 5", "Racing", "Xbox Series X/S", "Completed", 4, 35.5, "C:\\samples\\forza.exe", "Perfect for relaxing."},
-                {"Stardew Valley", "Simulation", "PC", "Playing", 4, 80.0, "C:\\samples\\stardew.exe", "Just one more day…"}
+        Object[][] d = {
+                {"The Legend of Zelda: Tears of the Kingdom", "Adventure", "Nintendo Switch", "Playing", 5, 62.5, "Building a flying machine took me hours."},
+                {"Elden Ring", "RPG", "PC", "Completed", 5, 140.0, "Brutal but unforgettable open world."},
+                {"Hades", "Indie", "PC", "Completed", 4, 48.0, "Great combat loop and story."},
+                {"God of War Ragnarök", "Action", "PlayStation 5", "Playing", 5, 21.0, "Stunning visuals."},
+                {"Baldur's Gate 3", "RPG", "PC", "To Play", 0, 0.0, "Everyone recommends it."},
+                {"Hollow Knight", "Platformer", "Nintendo Switch", "To Play", 0, 0.0, "Waiting for a long weekend."},
+                {"Forza Horizon 5", "Racing", "Xbox Series X/S", "Completed", 4, 35.5, "Perfect for relaxing."},
+                {"Stardew Valley", "Simulation", "PC", "Playing", 4, 80.0, "Just one more day…"}
         };
-
-        for(Object[] r : d) {
-            try {
-                // Ensure we create the Game object with a path that ends in .exe
-                Game g = new Game(
-                        (String)r[0], // Title
-                        (String)r[1], // Genre
-                        (String)r[2], // Platform
-                        (String)r[3], // Status
-                        (Integer)r[4], // Rating
-                        (Double)r[5],  // Hours
-                        (String)r[6],  // Path (.exe) <--- THIS WAS EMPTY BEFORE
-                        (String)r[7]   // Notes
-                );
-                this.db.insert(g);
-            } catch (Exception e) {
-                System.err.println("Failed to insert sample: " + r[0] + " Error: " + e.getMessage());
-            }
-        }
+        for (Object[] r : d)
+            db.insert(new Game((String) r[0], (String) r[1], (String) r[2], (String) r[3], (int) r[4], (double) r[5], "", (String) r[6]));
     }
 
     /** Trims spaces and the quotation marks that Windows adds with "Copy as path". */
@@ -123,5 +108,37 @@ public class GameService {
         if (!new File(p).isFile())
             return "Executable not found: " + p + ". Check the path or use Browse… to select the file.";
         return null;
+    }
+
+    /**
+     * FIX 1: Formats decimal hours (e.g., 5.5) into readable format (e.g., "5h 30m")
+     */
+    public String formatHours(double totalHours) {
+        if (totalHours <= 0 || Double.isNaN(totalHours)) return "0h 0m";
+        int hours = (int) totalHours;
+        int minutes = (int) Math.round((totalHours - hours) * 60);
+        if (minutes == 60) { hours++; minutes = 0; }
+        return hours + "h " + minutes + "m";
+    }
+
+    /**
+     * FIX 2: Launches games via Windows Shell to bypass Admin rights.
+     * Handles Valorant specifically via the Riot Client protocol.
+     */
+    public void launchGame(Game g) {
+        String path = g.getExePath();
+        if (path == null || path.isEmpty()) return;
+        try {
+            if (path.toLowerCase().contains("valorant")) {
+                // Special Riot Client launch for Valorant
+                Runtime.getRuntime().exec("cmd /c start riotclient://launch-product?product=valorant");
+            } else {
+                // Standard launch for all other .exe files
+                String command = "cmd /c start \"\" \"" + path + "\"";
+                Runtime.getRuntime().exec(command);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -44,7 +44,6 @@ public class DatabaseManager {
     }
 
     public void insert(Game g) {
-        // Removed one '?' from the end. There are now exactly 12 names and 12 question marks.
         write("INSERT INTO games(title,genre,platform,status,rating,hours,cover,notes,exe,procname,last_played,priority) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", g, false);
     }
 
@@ -59,7 +58,6 @@ public class DatabaseManager {
             p.setString(7, g.getCoverPath()); p.setString(8, g.getNotes());
             p.setString(9, g.getExePath()); p.setString(10, g.getProcessName()); p.setString(11, g.getLastPlayed());
             p.setString(12, g.getPriority());
-            System.out.println("DEBUG: Game: " + g.getTitle() + " | Priority: " + g.getPriority());
             if (withId) p.setInt(13, g.getId());
             p.executeUpdate();
         } catch (SQLException e) { throw new RuntimeException(e); }
