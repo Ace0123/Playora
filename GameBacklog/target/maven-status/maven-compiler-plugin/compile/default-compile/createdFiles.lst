@@ -1,4 +1,5 @@
 gamebacklog\Main.class
+gamebacklog\CardGrid.class
 gamebacklog\Game.class
 gamebacklog\GameFormView.class
 gamebacklog\SessionManager.class
